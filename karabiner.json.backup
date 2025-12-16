@@ -4,6 +4,44 @@
             "complex_modifications": {
                 "rules": [
                     {
+                        "description": "Aqua: Fnを押したセッションで右Controlキー押下でEnter送信",
+                        "manipulators": [
+                            {
+                                "from": { "key_code": "fn" },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "fn_voice_mode",
+                                            "value": 1
+                                        }
+                                    },
+                                    { "key_code": "fn" }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "fn_voice_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "right_control" },
+                                "to": [
+                                    { "key_code": "return_or_enter" },
+                                    {
+                                        "set_variable": {
+                                            "name": "fn_voice_mode",
+                                            "value": 0
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Press Escape to switch to English input method (Alphanumeric/Eisuu)",
                         "manipulators": [
                             {
@@ -75,6 +113,10 @@
                                         "optional": ["any"]
                                     }
                                 },
+                                "parameters": {
+                                    "key_repeat_delay_milliseconds": 0,
+                                    "key_repeat_interval_milliseconds": 1
+                                },
                                 "to": [{ "key_code": "left_arrow" }],
                                 "type": "basic"
                             },
@@ -85,6 +127,10 @@
                                         "mandatory": ["control"],
                                         "optional": ["any"]
                                     }
+                                },
+                                "parameters": {
+                                    "key_repeat_delay_milliseconds": 0,
+                                    "key_repeat_interval_milliseconds": 1
                                 },
                                 "to": [{ "key_code": "down_arrow" }],
                                 "type": "basic"
@@ -97,6 +143,10 @@
                                         "optional": ["any"]
                                     }
                                 },
+                                "parameters": {
+                                    "key_repeat_delay_milliseconds": 0,
+                                    "key_repeat_interval_milliseconds": 1
+                                },
                                 "to": [{ "key_code": "up_arrow" }],
                                 "type": "basic"
                             },
@@ -107,6 +157,10 @@
                                         "mandatory": ["control"],
                                         "optional": ["any"]
                                     }
+                                },
+                                "parameters": {
+                                    "key_repeat_delay_milliseconds": 0,
+                                    "key_repeat_interval_milliseconds": 1
                                 },
                                 "to": [{ "key_code": "right_arrow" }],
                                 "type": "basic"
@@ -167,28 +221,71 @@
                         ]
                     },
                     {
-                        "description": "Run pnpm db:reset in VSCode (Cmd+Shift+D)",
+                        "description": "Terminal: Shift+Enter → Option+Enter (改行のみ入力)",
                         "manipulators": [
                             {
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "^com\\.microsoft\\.VSCode$"
+                                            "^com\\.apple\\.Terminal$"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "d",
+                                    "key_code": "return_or_enter",
                                     "modifiers": {
-                                        "mandatory": ["command", "shift"]
+                                        "mandatory": ["shift"],
+                                        "optional": ["any"]
                                     }
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "cd /Users/soichiro/Work/ai-zaiko && /usr/local/bin/pnpm db:reset"
+                                        "key_code": "return_or_enter",
+                                        "modifiers": ["option"]
                                     }
                                 ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Fast repeat only for arrow keys",
+                        "manipulators": [
+                            {
+                                "from": { "key_code": "left_arrow" },
+                                "parameters": {
+                                    "key_repeat_delay_milliseconds": 40,
+                                    "key_repeat_interval_milliseconds": 4
+                                },
+                                "to": [{ "key_code": "left_arrow" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": { "key_code": "right_arrow" },
+                                "parameters": {
+                                    "key_repeat_delay_milliseconds": 40,
+                                    "key_repeat_interval_milliseconds": 4
+                                },
+                                "to": [{ "key_code": "right_arrow" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": { "key_code": "up_arrow" },
+                                "parameters": {
+                                    "key_repeat_delay_milliseconds": 40,
+                                    "key_repeat_interval_milliseconds": 4
+                                },
+                                "to": [{ "key_code": "up_arrow" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": { "key_code": "down_arrow" },
+                                "parameters": {
+                                    "key_repeat_delay_milliseconds": 40,
+                                    "key_repeat_interval_milliseconds": 4
+                                },
+                                "to": [{ "key_code": "down_arrow" }],
                                 "type": "basic"
                             }
                         ]
@@ -461,6 +558,10 @@
                 {
                     "from": { "key_code": "right_command" },
                     "to": [{ "key_code": "escape" }]
+                },
+                {
+                    "from": { "key_code": "left_control" },
+                    "to": [{ "key_code": "right_control" }]
                 }
             ],
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }

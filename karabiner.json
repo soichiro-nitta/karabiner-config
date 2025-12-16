@@ -4,44 +4,6 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "Aqua: Fnを押したセッションで右Controlキー押下でEnter送信",
-                        "manipulators": [
-                            {
-                                "from": { "key_code": "fn" },
-                                "to": [
-                                    {
-                                        "set_variable": {
-                                            "name": "fn_voice_mode",
-                                            "value": 1
-                                        }
-                                    },
-                                    { "key_code": "fn" }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "name": "fn_voice_mode",
-                                        "type": "variable_if",
-                                        "value": 1
-                                    }
-                                ],
-                                "from": { "key_code": "right_control" },
-                                "to": [
-                                    { "key_code": "return_or_enter" },
-                                    {
-                                        "set_variable": {
-                                            "name": "fn_voice_mode",
-                                            "value": 0
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Press Escape to switch to English input method (Alphanumeric/Eisuu)",
                         "manipulators": [
                             {
@@ -556,12 +518,12 @@
                     "to": [{ "key_code": "left_control" }]
                 },
                 {
-                    "from": { "key_code": "right_command" },
-                    "to": [{ "key_code": "escape" }]
+                    "from": { "key_code": "left_control" },
+                    "to": [{ "key_code": "return_or_enter" }]
                 },
                 {
-                    "from": { "key_code": "left_control" },
-                    "to": [{ "key_code": "right_control" }]
+                    "from": { "key_code": "right_command" },
+                    "to": [{ "key_code": "escape" }]
                 }
             ],
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
