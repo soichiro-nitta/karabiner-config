@@ -251,6 +251,84 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Option single tap to Cmd+V (paste)",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "left_option",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    { "key_code": "left_option", "lazy": true }
+                                ],
+                                "to_if_alone": [
+                                    { "key_code": "v", "modifiers": ["command"] }
+                                ],
+                                "to_if_held_down": [
+                                    { "key_code": "left_option", "lazy": true, "hold_down_milliseconds": 0 }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "right_option",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    { "key_code": "right_option", "lazy": true }
+                                ],
+                                "to_if_alone": [
+                                    { "key_code": "v", "modifiers": ["command"] }
+                                ],
+                                "to_if_held_down": [
+                                    { "key_code": "right_option", "lazy": true, "hold_down_milliseconds": 0 }
+                                ]
+                            }
+                        ],
+                        "parameters": {
+                            "basic.to_if_alone_timeout_milliseconds": 250,
+                            "basic.to_if_held_down_threshold_milliseconds": 0
+                        }
+                    },
+                    {
+                        "description": "Pass through Option+Space",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": {
+                                        "mandatory": ["left_option"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "spacebar",
+                                        "modifiers": ["left_option"]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "spacebar",
+                                    "modifiers": {
+                                        "mandatory": ["right_option"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "spacebar",
+                                        "modifiers": ["right_option"]
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
