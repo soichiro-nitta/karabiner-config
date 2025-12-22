@@ -329,63 +329,6 @@
                                 ]
                             }
                         ]
-                    },
-                    {
-                        "description": "Left Command single tap to Cmd+Z (undo)",
-                        "manipulators": [
-                            {
-                                "type": "basic",
-                                "from": {
-                                    "key_code": "left_command",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": [
-                                    { "key_code": "left_command", "lazy": true }
-                                ],
-                                "to_if_alone": [
-                                    { "key_code": "z", "modifiers": ["command"] }
-                                ],
-                                "to_if_held_down": [
-                                    { "key_code": "left_command", "lazy": true, "hold_down_milliseconds": 0 }
-                                ]
-                            }
-                        ],
-                        "parameters": {
-                            "basic.to_if_alone_timeout_milliseconds": 400,
-                            "basic.to_if_held_down_threshold_milliseconds": 0
-                        }
-                    },
-                    {
-                        "description": "Left Shift single tap to Cmd+Opt+Delete (delete all)",
-                        "manipulators": [
-                            {
-                                "type": "basic",
-                                "from": {
-                                    "key_code": "left_shift",
-                                    "modifiers": { "optional": ["any"] }
-                                },
-                                "to": [
-                                    { "key_code": "left_shift", "lazy": true }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "delete_or_backspace",
-                                        "modifiers": ["command", "option"]
-                                    }
-                                ],
-                                "to_if_held_down": [
-                                    {
-                                        "key_code": "left_shift",
-                                        "lazy": true,
-                                        "hold_down_milliseconds": 0
-                                    }
-                                ]
-                            }
-                        ],
-                        "parameters": {
-                            "basic.to_if_alone_timeout_milliseconds": 400,
-                            "basic.to_if_held_down_threshold_milliseconds": 0
-                        }
                     }
                 ]
             },
